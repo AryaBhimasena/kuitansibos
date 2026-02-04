@@ -1,0 +1,278 @@
+.preview-kuitansi {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+  font-family: "Times New Roman", serif;
+  font-size: 12pt;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ================= HEADER TOP ================= */
+.preview-header-top {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 12pt;
+  margin-bottom: 6px;
+}
+
+.preview-header-top .header-info {
+  width: 30%;
+  text-align: left;
+  font-size: 12pt;
+}
+
+.preview-header-top .row {
+  display: grid;
+  grid-template-columns: 100px 10px auto;
+  column-gap: 4px;
+  line-height: 1.3;
+}
+
+.preview-header-top .label {
+  text-align: left;
+}
+
+.preview-header-top .colon {
+  text-align: center;
+}
+
+.preview-header-top .value {
+  text-align: left;
+}
+
+/* ================= TITLE ================= */
+.preview-title {
+  text-align: center;
+  margin: 50px 0 50px;
+  font-size: 22pt;
+  letter-spacing: 1px;
+  font-weight: 600px;
+}
+
+/* ================= HEADER TABLE ================= */
+.preview-header {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 6px;
+  font-size: 12pt;
+}
+
+.preview-header td {
+  padding: 2px 4px;
+  vertical-align: top;
+}
+
+.preview-header td:nth-child(1) {
+  width: 120px;
+  white-space: nowrap;
+}
+
+/* kolom titik dua */
+.preview-header td:nth-child(2) {
+  width: 12px;
+  text-align: center;
+}
+
+.preview-header td:nth-child(3) {
+  text-align: left;
+}
+
+/* ================= TABLE BARANG ================= */
+.preview-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12pt;
+  table-layout: fixed; /* penting agar width kolom konsisten */
+}
+
+.preview-table th,
+.preview-table td {
+  border: 1px solid #000;
+  padding: 2px 4px;
+  word-wrap: break-word;
+  vertical-align: top;
+  font-size: 12pt;
+}
+
+.preview-table th {
+  text-align: center;
+  font-weight: bold;
+}
+
+/* ================= LEBAR KOLOM ================= */
+
+/* 1. No (diperkecil, proporsional) */
+.preview-table th:nth-child(1),
+.preview-table td:nth-child(1) {
+  width: 7%;
+  text-align: center;
+}
+
+/* 2. Uraian (lebih lebar + max width + wrap) */
+.preview-table th:nth-child(2),
+.preview-table td:nth-child(2) {
+  width: 40%;
+  max-width: 40%;
+  text-align: left;
+  white-space: normal;       /* allow wrap */
+  word-break: break-word;    /* paksa wrap jika panjang */
+}
+
+/* 3. Qty (diperkecil) */
+.preview-table th:nth-child(3),
+.preview-table td:nth-child(3) {
+  width: 8%;
+  text-align: center;
+}
+
+/* 4. Satuan (diperkecil) */
+.preview-table th:nth-child(4),
+.preview-table td:nth-child(4) {
+  width: 13%;
+  text-align: center;
+}
+
+/* 5. Harga satuan (diperlebar agar tidak overflow) */
+.preview-table th:nth-child(5) {
+  width: 25%;
+}
+
+.preview-table td:nth-child(5) {
+	width: 100%;
+}
+
+/* 6. Jumlah */
+.preview-table th:nth-child(6),
+.preview-table td:nth-child(6) {
+  width: 20%;
+  text-align: right;
+}
+
+/* ================= HARGA SATUAN (x Rp 65.000) ================= */
+.harga-cell {
+  display: grid;
+  grid-template-columns: 14px 22px auto; /* x | Rp | angka */
+  column-gap: 1px;
+  align-items: center;
+}
+
+.harga-cell .x {
+  text-align: center;
+}
+
+.harga-cell .rp {
+  text-align: left;
+}
+
+.harga-cell .harga {
+  text-align: right;
+  white-space: nowrap; /* angka tidak pecah baris */
+}
+
+/* ================= FOOTER ROW (Jumlah, PPN, PPh, Total) ================= */
+.footer-label {
+  text-align: left !important;
+  padding-left: 16px; /* indent ± 2 spasi */
+}
+
+.jumlah-cell {
+  text-align: right !important;
+}
+
+/* ================= BANK & RECEIVER ================= */
+.preview-bank {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 8px;
+  font-size: 12pt;
+}
+
+/* container info bank */
+.bank-info {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2px;
+}
+
+/* setiap baris pakai grid 3 kolom */
+.bank-info .row {
+  display: grid;
+  grid-template-columns: 90px 10px auto; /* label | : | value */
+  column-gap: 4px;
+  line-height: 1.3;
+}
+
+.bank-info .label {
+  text-align: left;
+}
+
+.bank-info .colon {
+  text-align: center;
+}
+
+.bank-info .value {
+  text-align: left;
+}
+
+.preview-receiver {
+  text-align: center;
+  min-width: 160px;
+}
+
+/* ================= JUMLAH BESAR ================= */
+.preview-jumlah {
+  margin-top: 6px;
+  font-size: 14pt;
+}
+
+/* ================= LUNAS ================= */
+.preview-lunas {
+  margin: 20px 0;
+
+  width: 50%;
+  margin-left: auto;
+
+  font-size: 12pt;
+  text-align: left;
+  line-height: 1.3;
+}
+
+/* ================= SIGNATURE ================= */
+.preview-signature {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto;      /* dorong ke bawah halaman */
+  font-size: 12pt;
+}
+
+.preview-signature div {
+  width: 45%;
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ================= HR ================= */
+.preview-kuitansi hr {
+  margin: 6px 0;
+  border: none;
+  border-top: 1px solid #000;
+}
+
+/* ================= RESPONSIVE TIGHT MODE ================= */
+/* Jika konten terlalu tinggi, otomatis dipadatkan */
+@media (max-height: 800px) {
+  .preview-kuitansi {
+    font-size: 12pt;
+    line-height: 1.15;
+  }
+
+  .preview-table {
+    font-size: 7.5pt;
+  }
+
+  .preview-header-top {
+    font-size: 7.5pt;
+  }
+}

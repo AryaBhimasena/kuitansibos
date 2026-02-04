@@ -1,0 +1,198 @@
+.kuitansi-wrapper {
+  padding: 24px 32px;
+  font-family: system-ui, sans-serif;
+  background: #fff;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.kuitansi-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.kuitansi-header h2 {
+  font-size: 20px;
+}
+
+/* TOP BAR */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+/* FILTER BAR */
+.filter-bar {
+  display: flex;
+  gap: 12px;
+}
+
+.search-input {
+  width: 320px; /* diperlebar */
+}
+
+.filter-bar input {
+  border: 2px solid #111;
+  padding: 6px 10px;
+}
+
+/* BUTTONS */
+.btn-back {
+  border: 2px solid #111;
+  background: #fff;
+  padding: 6px 12px;
+  cursor: pointer;
+  box-shadow: 3px 3px 0 #111;
+}
+
+.btn-create {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 2px solid #111;
+  background: #eef4ff;
+  padding: 8px 16px;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #111;
+  font-weight: 600;
+
+  transition: 
+    transform 0.15s ease-out,
+    box-shadow 0.15s ease-out,
+    background 0.15s ease-out;
+}
+
+/* HOVER = tombol naik */
+.btn-create:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #111;
+  background: #dde9ff;
+}
+
+/* ACTIVE = tombol ditekan */
+.btn-create:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #111;
+}
+
+.btn-create svg {
+  transition: transform 0.2s ease;
+}
+
+.btn-create:hover svg {
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* TABLE */
+.table-card {
+  border: 2px solid #111;
+  box-shadow: 5px 5px 0 #111;
+  padding: 12px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: 2px solid #111;
+  padding: 8px 10px;
+  font-size: 13px;
+}
+
+th {
+  background: #f3f3f3;
+}
+
+.list-row {
+  cursor: pointer;
+  background: #fff;
+}
+
+.list-row:hover {
+  background: #f7f7f7;
+}
+
+/* DETAIL ROW */
+.detail-row td {
+  background: #fafafa;
+}
+
+.detail-box {
+  border: 2px solid #111;
+  padding: 10px;
+  box-shadow: 3px 3px 0 #111;
+  margin: 6px 0;
+}
+
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 6px;
+}
+
+.detail-table th,
+.detail-table td {
+  border: 2px solid #111;
+  padding: 6px 8px;
+  font-size: 12px;
+  background: #fff;
+}
+
+/* ACTION BUTTONS */
+.action-buttons {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.btn-action {
+  border: 2px solid #111;
+  background: #fff;
+  padding: 4px 6px;
+  cursor: pointer;
+  box-shadow: 2px 2px 0 #111;
+}
+
+.btn-action.expand {
+  background: #fff;
+  border: 2px solid #111;
+  box-shadow: 2px 2px 0 #111;
+}
+
+.btn-action.expand:hover {
+  background: #eee;
+}
+
+.list-row {
+  background: #fff;
+}
+
+.list-row:hover {
+  background: #f5f5f5;
+}
+
+.detail-box {
+  border: 2px solid #111;
+  padding: 10px;
+  box-shadow: 3px 3px 0 #111;
+  margin: 6px 0;
+}
+
+/* detail row */
+.detail-row td {
+  background: #fafafa;
+}
+
+.btn-action.edit {
+  background: #eef4ff;
+}
+
+.btn-action.delete {
+  background: #ffecec;
+}

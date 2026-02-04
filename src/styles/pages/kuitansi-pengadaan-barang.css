@@ -1,0 +1,323 @@
+/* ===============================
+   PAGE LAYOUT
+================================ */
+.kuitansi-page {
+  display: grid;
+  grid-template-columns: 3fr 7fr;
+  gap: 20px;
+  padding: 20px;
+  background: #f6f6f6;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.kuitansi-page > * {
+  min-width: 0;
+  min-height: 0;
+}
+
+/* ===============================
+   CARD
+================================ */
+.form-card {
+  background: #fff;
+  border: 3px solid #000;
+  box-shadow: 6px 6px 0 #000;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 40px); /* supaya punya tinggi tetap */
+}
+
+/* ===============================
+   HEADER
+================================ */
+.form-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.back-button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  color: #374151;
+}
+
+.back-button:hover {
+  background: #f3f4f6;
+}
+
+.form-card h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.step-title {
+  margin: 6px 0 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+}
+
+/* ===============================
+   STEP CONTENT
+================================ */
+.step-content {
+  min-height: 420px;
+}
+
+/* ===============================
+   NAVIGATION
+================================ */
+.step-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: auto; /* ini kuncinya */
+  padding-top: 16px;
+}
+
+.step-navigation button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  font-weight: 700;
+  border: 2px solid #000;
+  background: #fff;
+  cursor: pointer;
+}
+
+.step-navigation button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.step-navigation button:not(:disabled):hover {
+  background: #000;
+  color: #fff;
+}
+
+/* ===============================
+   PREVIEW CARD
+================================ */
+.preview-card {
+  background: #fff;
+  border: 3px solid #000;
+  box-shadow: 6px 6px 0 #000;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 40px);
+}
+
+/* ===============================
+   TOOLBAR
+================================ */
+.preview-toolbar {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.preview-toolbar button {
+  border: 2px solid #000;
+  background: #fff;
+  padding: 6px;
+  cursor: pointer;
+}
+
+.preview-toolbar button:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* ===============================
+   PREVIEW VIEWPORT
+================================ */
+.preview-viewport {
+  background: #e5e5e5;
+  padding: 14px;
+
+  flex: 1; /* PENTING: pakai sisa tinggi card */
+  overflow: hidden;
+
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* mulai dari atas */
+  overflow: auto;
+}
+
+/* ===============================
+   CENTER WRAPPER
+================================ */
+.a4-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+/* ===============================
+   A4 PAGE
+================================ */
+.a4 {
+  width: 794px;
+  height: 1123px;
+
+  background: #fff;
+  border: 2px solid #000;
+  padding: 24px;
+
+  box-sizing: border-box;
+  transform-origin: top center;
+
+  box-shadow: 8px 8px 0 #000;
+  overflow: hidden;
+
+  font-family: "Times New Roman", serif;
+  font-size: 12pt;
+  line-height: 1.4;
+}
+
+.a4-content {
+  width: 100%;
+  padding: 24px;
+}
+
+.a4-export {
+  width: 794px;
+  min-height: 1123px;
+  page-break-after: always;
+}
+
+/* ===============================
+   FOOTER
+================================ */
+.preview-footer {
+  margin-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+}
+
+.preview-footer button {
+  border: 2px solid #000;
+  background: #f0f0f0;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.preview-footer button:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* ================= TAB BARANG ROOT ================= */
+.tb-barang-root {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+  box-sizing: border-box;
+  font-size: 11px;
+}
+
+/* ================= FORM INPUT ================= */
+.tb-barang-form {
+  display: grid;
+  grid-template-columns: 3fr 30px 50px 1fr auto;
+  gap: 4px;
+  align-items: center;
+}
+
+.tb-barang-input {
+  padding: 4px 6px;
+  font-size: 11px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.tb-barang-qty {
+  text-align: center;
+}
+
+.tb-barang-satuan {
+  text-align: center;
+}
+
+/* ================= BUTTON ================= */
+.tb-barang-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  font-size: 11px;
+  border: 1px solid #444;
+  background: #f3f3f3;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.tb-barang-btn:hover {
+  background: #e6e6e6;
+}
+
+/* ================= TABLE WRAPPER (SCROLL) ================= */
+.tb-barang-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #ccc;
+}
+
+/* paksa table lebih lebar dari container */
+.tb-barang-table {
+  min-width: 480px;
+  border-collapse: collapse;
+  font-size: 11px;
+}
+
+/* ================= TABLE CELL ================= */
+.tb-barang-table th,
+.tb-barang-table td {
+  border: 1px solid #000;
+  padding: 4px 6px;
+  white-space: nowrap;
+}
+
+.tb-barang-table th {
+  background: #f0f0f0;
+  text-align: center;
+}
+
+/* ================= DELETE BUTTON ================= */
+.tb-barang-del {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+.tb-barang-del:hover {
+  color: red;
+}
+
+/* ================= RESPONSIVE (kalau makin sempit) ================= */
+@media (max-width: 500px) {
+  .tb-barang-form {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .tb-barang-btn {
+    grid-column: span 2;
+    justify-content: center;
+  }
+}

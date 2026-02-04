@@ -1,0 +1,132 @@
+/* ===============================
+   TAB FORM BASE
+================================ */
+.tab-form {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ===============================
+   LABEL
+================================ */
+.tab-form label {
+  font-size: 13px;
+  font-weight: 700;
+  color: #000;
+}
+
+/* ===============================
+   INPUT ELEMENT
+================================ */
+.tab-form input,
+.tab-form textarea,
+.tab-form select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 2px solid #000;
+  font-size: 14px;
+  background: #fff;
+  box-sizing: border-box;
+  outline: none;
+}
+
+.tab-form input:focus,
+.tab-form textarea:focus,
+.tab-form select:focus {
+  box-shadow: 2px 2px 0 #000;
+}
+
+.tab-form textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ===============================
+   INLINE ROW (UNTUK HONOR ITEMS)
+================================ */
+.tab-form .inline {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr auto;
+  gap: 8px;
+  align-items: end;
+}
+
+/* ===============================
+   BUTTON
+================================ */
+.tab-form button {
+  border: 2px solid #000;
+  background: #fff;
+  padding: 8px 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.tab-form button:hover {
+  background: #000;
+  color: #fff;
+}
+
+/* ===============================
+   TABLE
+================================ */
+.tab-form table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+.tab-form th,
+.tab-form td {
+  border: 2px solid #000;
+  padding: 6px 8px;
+  text-align: left;
+}
+
+.tab-form th {
+  background: #000;
+  color: #fff;
+}
+
+/* ===============================
+   SECTION TITLE
+================================ */
+.tab-form h4 {
+  margin-top: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  border-bottom: 2px solid #000;
+  padding-bottom: 4px;
+}
+
+/* ===============================
+   SCROLL ZONE (HONOR STEPS)
+================================ */
+.kh-tab-scroll {
+  height: 100%;
+  max-height: calc(100vh - 260px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 8px;
+  box-sizing: border-box;
+}
+
+/* ===============================
+   SCROLLBAR
+================================ */
+.kh-tab-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.kh-tab-scroll::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 6px;
+}
+
+.kh-tab-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
