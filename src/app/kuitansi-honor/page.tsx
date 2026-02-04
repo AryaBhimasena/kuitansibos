@@ -278,7 +278,7 @@ export default function KuitansiPembayaranHonorPage() {
         }}
       >
         <div className="a4-export">
-          <KhPreviewKuitansi data={khFormData} />
+          
         </div>
       </div>
 
