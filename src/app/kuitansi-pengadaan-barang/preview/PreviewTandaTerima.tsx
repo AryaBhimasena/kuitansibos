@@ -114,7 +114,7 @@ export default function PreviewTandaTerima({ data }: Props) {
 
       {/* TERBILANG OTOMATIS */}
       <div className="tt-terbilang">
-        Terbilang : <b>{terbilang(total)} rupiah</b>
+        Terbilang : <b>{terbilang(total)} Rupiah</b>
       </div>
 
       {/* KETERANGAN */}
@@ -131,8 +131,8 @@ export default function PreviewTandaTerima({ data }: Props) {
           <div>Penerima Barang</div>
           <br /><br /><br />
           <br /><br /><br />
-          <b>{data.penerima?.namaPenerima || "Nama"}</b>
-          <div>NIP. {data.penerima?.nipPenerima || "-"}</div>
+          <b>{data.namaBendahara || "Nama"}</b>
+          <div>NIP. {data.nipBendahara || "-"}</div>
         </div>
 
         {/* PENYERAH BARANG */}

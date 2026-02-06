@@ -1,57 +1,93 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { useRouter } from "next/navigation";
 import { Pencil, Trash2, Plus, ChevronDown, ChevronUp } from "lucide-react";
 import "@/styles/pages/pengadaan-barang.css";
+
+import { getKuitansiBarangHeader } from "@/services/KuitansiPengadaanBarangHelper";
+
+function normalizeDate(dateStr: string) {
+  if (!dateStr) return "";
+
+  const d = new Date(dateStr);
+
+  if (isNaN(d.getTime())) return "";
+
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+
+  return `${year}-${month}-${day}`;
+}
 
 export default function KuitansiPengadaanPage() {
   const router = useRouter();
 
   const [search, setSearch] = useState("");
   const [filterDate, setFilterDate] = useState("");
-  const [jenisKuitansi] = useState("pengadaan");
-  const [openRow, setOpenRow] = useState(null); // row yang dibuka
+  const [openRow, setOpenRow] = useState<number | null>(null);
+  const [dataKuitansi, setDataKuitansi] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+  
+function formatTanggalIndo(dateStr: string) {
+  if (!dateStr) return "";
 
-  const dataKuitansi = [
-    {
-      no: "K-001",
-      tanggal: "2026-01-10",
-      uraian: "Pembelian Laptop",
-      nominal: 2500000,
-      items: [
-        { nama: "Laptop Acer", qty: 2, harga: 1000000 },
-        { nama: "Mouse", qty: 2, harga: 250000 },
-      ],
-    },
-    {
-      no: "K-005",
-      tanggal: "2026-01-20",
-      uraian: "Pembelian Printer",
-      nominal: 3000000,
-      items: [
-        { nama: "Printer Epson", qty: 1, harga: 2500000 },
-        { nama: "Tinta", qty: 2, harga: 250000 },
-      ],
-    },
-    {
-      no: "K-009",
-      tanggal: "2026-01-28",
-      uraian: "Pembelian Meja",
-      nominal: 3500000,
-      items: [
-        { nama: "Meja Guru", qty: 5, harga: 700000 },
-      ],
-    },
+  const bulanIndo = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember"
   ];
 
+const d = new Date(dateStr);
+
+  const tanggal = d.getDate().toString().padStart(2, "0");
+  const bulan = bulanIndo[d.getMonth()];
+  const tahun = d.getFullYear();
+
+  return `${tanggal} ${bulan} ${tahun}`;
+}
+
+
+  useEffect(() => {
+    loadData();
+  }, []);
+
+  async function loadData() {
+    try {
+      const res = await getKuitansiBarangHeader();
+      if (res.success) {
+        setDataKuitansi(res.data);
+      }
+    } catch (err) {
+      console.error("Gagal load data:", err);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   const filteredData = dataKuitansi.filter((item) => {
-    const matchSearch = item.no.toLowerCase().includes(search.toLowerCase());
-    const matchDate = filterDate ? item.tanggal === filterDate : true;
+	const matchSearch = String(item.noKuitansi || "")
+	  .toLowerCase()
+	  .includes(search.toLowerCase());
+
+const matchDate = filterDate
+  ? normalizeDate(item.tanggal) === normalizeDate(filterDate)
+  : true;
+
     return matchSearch && matchDate;
   });
 
-  const toggleRow = (index) => {
+  const toggleRow = (index: number) => {
     setOpenRow(openRow === index ? null : index);
   };
 
@@ -83,92 +119,83 @@ export default function KuitansiPengadaanPage() {
           />
         </div>
 
-        <button className="btn-create" onClick={() => router.push("/kuitansi-pengadaan-barang")}>
+        <button
+          className="btn-create"
+          onClick={() => router.push("/kuitansi-pengadaan-barang")}
+        >
           <Plus size={16} /> Buat Kuitansi
         </button>
       </div>
 
-		{/* LIST STRIP TABLE */}
-		<div className="table-card">
-		  <table>
-			<thead>
-			  <tr>
-				<th>No Kuitansi</th>
-				<th>Tanggal</th>
-				<th>Uraian</th>
-				<th>Nominal</th>
-				<th style={{ width: "140px" }}>Aksi</th>
-			  </tr>
-			</thead>
-			<tbody>
-			  {filteredData.map((item, i) => (
-				<>
-				  {/* MAIN ROW */}
-				  <tr key={i} className="list-row">
-					<td>{item.no}</td>
-					<td>{item.tanggal}</td>
-					<td>{item.uraian}</td>
-					<td>Rp {item.nominal.toLocaleString("id-ID")}</td>
-					<td>
-					  <div className="action-buttons">
-						{/* EXPAND BUTTON */}
-						<button
-						  className="btn-action expand"
-						  onClick={() => toggleRow(i)}
-						>
-						  {openRow === i ? (
-							<ChevronUp size={14} />
-						  ) : (
-							<ChevronDown size={14} />
-						  )}
-						</button>
+      {/* TABLE */}
+      <div className="table-card">
+        {loading ? (
+          <p style={{ padding: 16 }}>Loading data...</p>
+        ) : (
+          <table>
+            <thead>
+              <tr>
+                <th>No Kuitansi</th>
+                <th>Tanggal</th>
+                <th>Uraian</th>
+                <th>Nominal</th>
+                <th style={{ width: "140px" }}>Aksi</th>
+              </tr>
+            </thead>
+            <tbody>
+{filteredData.map((item, i) => (
+  <Fragment key={item.idKuitansi || i}>
+    {/* MAIN ROW */}
+    <tr className="list-row">
+      <td>{item.noKuitansi}</td>
+      <td>{formatTanggalIndo(item.tanggal)}</td>
+      <td>{item.perihal}</td>
+      <td>
+        Rp {Number(item.totalAkhir).toLocaleString("id-ID")}
+      </td>
+      <td>
+        <div className="action-buttons">
+          <button
+            className="btn-action expand"
+            onClick={() => toggleRow(i)}
+          >
+            {openRow === i ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
+          </button>
 
-						{/* EDIT */}
-						<button className="btn-action edit">
-						  <Pencil size={14} />
-						</button>
+          <button className="btn-action edit">
+            <Pencil size={14} />
+          </button>
 
-						{/* DELETE */}
-						<button className="btn-action delete">
-						  <Trash2 size={14} />
-						</button>
-					  </div>
-					</td>
-				  </tr>
+          <button className="btn-action delete">
+            <Trash2 size={14} />
+          </button>
+        </div>
+      </td>
+    </tr>
 
-				  {/* DETAIL ROW */}
-				  {openRow === i && (
-					<tr className="detail-row">
-					  <td colSpan="5">
-						<div className="detail-box">
-						  <strong>Detail Barang:</strong>
-						  <table className="detail-table">
-							<thead>
-							  <tr>
-								<th>Nama Barang</th>
-								<th>Qty</th>
-								<th>Harga</th>
-							  </tr>
-							</thead>
-							<tbody>
-							  {item.items.map((d, idx) => (
-								<tr key={idx}>
-								  <td>{d.nama}</td>
-								  <td>{d.qty}</td>
-								  <td>Rp {d.harga.toLocaleString("id-ID")}</td>
-								</tr>
-							  ))}
-							</tbody>
-						  </table>
-						</div>
-					  </td>
-					</tr>
-				  )}
-				</>
-			  ))}
-			</tbody>
-		  </table>
-		</div>
+    {/* DETAIL ROW */}
+    {openRow === i && (
+      <tr className="detail-row">
+        <td colSpan={5}>
+          <div className="detail-box">
+            <strong>Informasi Transaksi:</strong>
+            <ul>
+              <li>No BKU: {item.noBku}</li>
+              <li>Nama Toko: {item.namaToko}</li>
+              <li>Pemberi Dana: {item.pemberiDana}</li>
+              <li>Tempat: {item.tempat}</li>
+              <li>Perihal: {item.perihal}</li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    )}
+  </Fragment>
+))}
+            </tbody>
+          </table>
+        )}
+      </div>
     </div>
   );
 }

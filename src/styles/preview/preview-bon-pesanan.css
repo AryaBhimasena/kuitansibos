@@ -148,8 +148,10 @@
 ================================ */
 .bp-signature-right {
   margin-top: 14px;
-  text-align: right;
+  margin-left: auto;   /* dorong ke kanan */
+  text-align: left;    /* teks tetap rata kiri */
   line-height: 1.4;
+  width: 160px;        /* opsional, biar rapi */
 }
 
 /* ===============================

@@ -1,24 +1,48 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 import "@/styles/login-form.css";
 
+import { login } from "@/services/auth";
+
 export default function LoginPage() {
+  const router = useRouter();
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (loading) return;
 
     setLoading(true);
+    setError(null);
 
-    setTimeout(() => {
-      alert("Login diproses");
+    try {
+      const res = await login(username, password);
+
+      if (!res.success) {
+        setError(res.message);
+        setLoading(false);
+        return;
+      }
+
+      localStorage.setItem(
+        "auth_user",
+        JSON.stringify(res.data)
+      );
+
+      // Redirect ke dashboard
+      router.push("/dashboard");
+
+    } catch (err: any) {
+      setError("Gagal menghubungi server");
       setLoading(false);
-    }, 1500);
+    }
   };
 
   return (
@@ -35,8 +59,12 @@ export default function LoginPage() {
           />
 
           <div className="app-identity">
-            <h1>Aplikasi Kuitansi</h1>
-            <p>SMAS BINA BANGSA<br />SUNGAI RAYA</p>
+            <h1>Aplikasi SPJ BOS</h1>
+            <p>
+              SMAS BINA BANGSA
+              <br />
+              SUNGAI RAYA
+            </p>
           </div>
         </div>
 
@@ -47,6 +75,12 @@ export default function LoginPage() {
         <div className="login-right">
           <h2>Login</h2>
 
+          {error && (
+            <div className="login-error">
+              {error}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit}>
             <div className="form-group">
               <label>Username</label>
@@ -55,6 +89,7 @@ export default function LoginPage() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
+                disabled={loading}
               />
             </div>
 
@@ -65,6 +100,7 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                disabled={loading}
               />
             </div>
 

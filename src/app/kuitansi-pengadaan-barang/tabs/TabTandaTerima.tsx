@@ -44,21 +44,6 @@ export default function TabTandaTerima({ data, setData }: Props) {
       <h4>Nilai & Keterangan</h4>
 
       <div className="form-group">
-        <label>Nominal (Rupiah)</label>
-        <input
-          type="number"
-          placeholder="Contoh : 15000000"
-          value={data.nominal || ""}
-          onChange={(e) =>
-            setData(prev => ({
-              ...prev,
-              nominal: e.target.value,
-            }))
-          }
-        />
-      </div>
-
-      <div className="form-group">
         <label>Keterangan Tanda Terima</label>
         <input
           type="text"
@@ -80,13 +65,13 @@ export default function TabTandaTerima({ data, setData }: Props) {
         <input
           type="text"
           placeholder="Nama Penerima"
-          value={data.penerima?.namaPenerima || ""}
+          value={data.namaBendahara || ""}
           onChange={(e) =>
             setData(prev => ({
               ...prev,
               penerima: {
                 ...prev.penerima,
-                namaPenerima: e.target.value,
+                namaBendahara: e.target.value,
               }
             }))
           }
@@ -98,13 +83,13 @@ export default function TabTandaTerima({ data, setData }: Props) {
         <input
           type="text"
           placeholder="NIP"
-          value={data.penerima?.nipPenerima || ""}
+          value={data.nipBendahara || ""}
           onChange={(e) =>
             setData(prev => ({
               ...prev,
               penerima: {
                 ...prev.penerima,
-                nipPenerima: e.target.value,
+                nipBendahara: e.target.value,
               }
             }))
           }

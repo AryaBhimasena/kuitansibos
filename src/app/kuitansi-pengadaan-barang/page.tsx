@@ -6,6 +6,7 @@ import { ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from "lucide-react";
 import { useRouter } from "next/navigation";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import { createKuitansiBarang } from "@/services/KuitansiPengadaanBarangHelper";
 
 import TabDataPengadaan from "./tabs/TabDataPengadaan";
 import TabBarang from "./tabs/TabBarang";
@@ -44,6 +45,12 @@ const stepPagesMap = {
 };
 
 export default function KuitansiPengadaanBarangPage() {
+  const [isMounted, setIsMounted] = useState(false);
+
+	useEffect(() => {
+	  setIsMounted(true);
+	}, []);
+
   const [step, setStep] = useState(0);
   const [zoom, setZoom] = useState(1);
   const [page, setPage] = useState(1);
@@ -53,6 +60,8 @@ export default function KuitansiPengadaanBarangPage() {
   const page4Steps = ["bast"];
   const router = useRouter();
   const exportRef = useRef(null);
+  const [showPayloadModal, setShowPayloadModal] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   
 const viewportRef = useRef(null);
 const [autoScale, setAutoScale] = useState(1);
@@ -62,6 +71,65 @@ const A4_HEIGHT = 1123;
 
 const previewRef = useRef(null);
 const [totalPages, setTotalPages] = useState(1);
+
+const handleSave = async () => {
+  setShowPayloadModal(true);
+  setIsSaving(true);
+
+  try {
+    const res = await createKuitansiBarang(formData);
+
+    if (!res.success) {
+      console.error("API ERROR:", res);
+      alert("Gagal menyimpan: " + res.message);
+      return;
+    }
+
+    alert("Berhasil disimpan: " + res.idKuitansi);
+
+  } catch (err) {
+    console.error("FETCH ERROR:", err);
+    alert("Gagal menyimpan data (network/server error)");
+  } finally {
+    setIsSaving(false);
+  }
+};
+
+	const [formData, setFormData] = useState({
+	  tanggal: "",
+	  noBku: "",
+	  noKuitansi: "",
+	  pemberiDana: "",
+	  nominal: "",
+	  keteranganPembayaran: "",
+	  
+	  tanggalLunas: "",
+	  tempat: "",
+	  
+	  items: [],
+	  
+	  penerima: {
+		namaPenerima: "",
+		bank: "",
+		noRekening: "",
+		atasNama: "",
+		npwp: ""
+	  },
+
+	  jabatanKepala: "",
+	  namaKepala: "",
+	  nipKepala: "",
+
+	  jabatanBendahara: "",
+	  namaBendahara: "",
+	  nipBendahara: "",
+
+	  pembayaran: {},
+	  lampiran: {},
+	  bast: {},
+	  fotoBarang: [],
+	  fotoNota: []
+	});
 
 const handleExportPDF = async () => {
   if (!exportRef.current) return;
@@ -102,7 +170,7 @@ const handleExportPDF = async () => {
         backgroundColor: "#ffffff"
       });
 
-      const imgData = canvas.toDataURL("image/png");
+      const imgData = canvas.toDataURL("image/jpeg");
 
       if (!isFirstPage) pdf.addPage();
       isFirstPage = false;
@@ -112,26 +180,29 @@ const handleExportPDF = async () => {
 
       pdf.addImage(
         imgData,
-        "PNG",
+        "JPEG",
         MARGIN,
         MARGIN,
         CONTENT_WIDTH,
-        CONTENT_HEIGHT * ratio
+        CONTENT_HEIGHT * ratio,
+		undefined,
+		"FAST"
       );
 
       renderedHeight += sliceHeight;
     }
   }
 
-  const fileName = formData.noKuitansi
-    ? `${formData.noKuitansi}.pdf`
-    : "kuitansi.pdf";
+	const safeNoKuitansi = formData.noKuitansi
+	  ? formData.noKuitansi.replace(/[^\w\-]/g, "_")
+	  : null;
+
+	const fileName = safeNoKuitansi
+	  ? `Kuitansi-Barang-${safeNoKuitansi}.pdf`
+	  : "Kuitansi-Barang.pdf";
+
 
   pdf.save(fileName);
-};
-
-const handleSave = () => {
-  console.log("DATA DISIMPAN:", formData);
 };
 
 useEffect(() => {
@@ -161,42 +232,6 @@ useEffect(() => {
 	  setStep((s) => Math.max(s - 1, 0));
 	  setPage(1);
 	};
-
-	const [formData, setFormData] = useState({
-	  tanggal: "",          // tanggal kuitansi (kanan bawah)
-	  tempat: "",
-
-	  tanggalLunas: "",     // untuk preview-lunas
-
-	  jabatanKepala: "",
-	  namaKepala: "",
-	  nipKepala: "",
-
-	  jabatanBendahara: "",
-	  namaBendahara: "",
-	  nipBendahara: "",
-
-	  noBku: "",
-	  noKuitansi: "",
-	  pemberiDana: "",
-	  nominal: "",
-	  keteranganPembayaran: "",
-	  items: [],
-
-	  penerima: {
-		namaPenerima: "",
-		bank: "",
-		noRekening: "",
-		atasNama: "",
-		npwp: ""
-	  },
-
-	  pembayaran: {},
-	  lampiran: {},
-	  bast: {},
-	  fotoBarang: [],
-	  fotoNota: []
-	});
 
 const renderPreview = () => {
   const key = steps[step].key;
@@ -281,29 +316,34 @@ useEffect(() => {
           {renderStep()}
         </div>
 
-<div className="step-navigation">
-  <button onClick={prevStep} disabled={step === 0}>
-    <ChevronLeft size={16}/> Kembali
-  </button>
+		<div className="step-navigation">
+		  <button onClick={prevStep} disabled={step === 0}>
+			<ChevronLeft size={16}/> Kembali
+		  </button>
 
-  {step === steps.length - 1 ? (
-    <div style={{ display: "flex", gap: "10px" }}>
-      <button onClick={handleSave}>
-        💾 Simpan
-      </button>
+		  {step === steps.length - 1 ? (
+			<div style={{ display: "flex", gap: "10px" }}>
+				<button onClick={handleSave} disabled={isSaving}>
+				  {isSaving ? "Menyimpan..." : "Simpan"}
+				</button>
 
-      <button onClick={handleExportPDF}>
-        📄 Export PDF
-      </button>
-    </div>
-  ) : (
-    <button onClick={nextStep}>
-      Lanjut <ChevronRight size={16}/>
-    </button>
-  )}
-</div>
+			  <button onClick={handleExportPDF}>
+				📄 Export PDF
+			  </button>
+			</div>
+		  ) : (
+			<button onClick={nextStep}>
+			  Lanjut <ChevronRight size={16}/>
+			</button>
+		  )}
+		</div>
 
       </div>
+		  {!isMounted ? (
+			<div style={{ padding: 20 }}>Loading preview...</div>
+		  ) : (
+		  
+		  <>
 
 		{/* RIGHT PREVIEW */}
 		<div className="preview-card">
@@ -349,7 +389,10 @@ useEffect(() => {
 			</div>
 
 		</div>
+	</>
+  )}
 {/* HIDDEN EXPORT AREA */}
+{isMounted && (
 <div
   ref={exportRef}
   style={{
@@ -375,7 +418,28 @@ useEffect(() => {
     <PreviewBAST data={formData} />
   </div>
 </div>
+)}
 
+{showPayloadModal && (
+  <div className="payload-modal-overlay">
+    <div className="payload-modal">
+      <div className="payload-modal-header">
+        <h3>Payload Data (Preview)</h3>
+        <button onClick={() => setShowPayloadModal(false)}>✖</button>
+      </div>
+
+      <pre className="payload-content">
+        {JSON.stringify(formData, null, 2)}
+      </pre>
+
+      <div className="payload-modal-footer">
+        <button onClick={() => setShowPayloadModal(false)}>
+          Tutup
+        </button>
+      </div>
+    </div>
+  </div>
+)}
     </div>
   );
 }

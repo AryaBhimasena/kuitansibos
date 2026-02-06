@@ -67,7 +67,7 @@ export default function PreviewPersetujuanBarang({ data }: Props) {
             <tr>
               <td>Sudah diterima dari</td>
               <td>:</td>
-              <td>Kepala {data.pemberiDana || ".........."}</td>
+              <td>{data.pemberiDana || ".........."}</td>
             </tr>
             <tr>
               <td>Banyaknya uang</td>

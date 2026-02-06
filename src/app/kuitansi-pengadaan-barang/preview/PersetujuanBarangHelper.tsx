@@ -51,11 +51,16 @@ export function formatTanggalDDMMYYYY(dateString: string) {
 
   const date = new Date(dateString);
 
+  const bulan = [
+    "Januari","Februari","Maret","April","Mei","Juni",
+    "Juli","Agustus","September","Oktober","November","Desember"
+  ];
+
   const dd = String(date.getDate()).padStart(2, "0");
-  const mm = String(date.getMonth() + 1).padStart(2, "0");
+  const mm = bulan[date.getMonth()];
   const yyyy = date.getFullYear();
 
-  return `${dd}-${mm}-${yyyy}`;
+  return `${dd} ${mm} ${yyyy}`;
 }
 
 /* ================= CALCULATION ================= */
@@ -174,21 +179,21 @@ export function FooterSection({ total, data }: FooterProps) {
 }
 
 export function terbilang(n: number): string {
-  if (n === 0) return "nol";
+  if (n === 0) return "Nol";
 
   const angka = [
     "",
-    "satu",
-    "dua",
-    "tiga",
-    "empat",
-    "lima",
-    "enam",
-    "tujuh",
-    "delapan",
-    "sembilan",
-    "sepuluh",
-    "sebelas",
+    "Satu",
+    "Dua",
+    "Tiga",
+    "Empat",
+    "Lima",
+    "Enam",
+    "Tujuh",
+    "Delapan",
+    "Sembilan",
+    "Sepuluh",
+    "Sebelas",
   ];
 
   function convert(x: number): string {
@@ -197,30 +202,30 @@ export function terbilang(n: number): string {
     if (x < 12) {
       str = angka[x];
     } else if (x < 20) {
-      str = convert(x - 10) + " belas";
+      str = convert(x - 10) + " Belas";
     } else if (x < 100) {
-      str = convert(Math.floor(x / 10)) + " puluh";
+      str = convert(Math.floor(x / 10)) + " Puluh";
       if (x % 10 !== 0) str += " " + convert(x % 10);
     } else if (x < 200) {
-      str = "seratus";
+      str = "Seratus";
       if (x - 100 !== 0) str += " " + convert(x - 100);
     } else if (x < 1000) {
-      str = convert(Math.floor(x / 100)) + " ratus";
+      str = convert(Math.floor(x / 100)) + " Ratus";
       if (x % 100 !== 0) str += " " + convert(x % 100);
     } else if (x < 2000) {
-      str = "seribu";
+      str = "Seribu";
       if (x - 1000 !== 0) str += " " + convert(x - 1000);
     } else if (x < 1_000_000) {
-      str = convert(Math.floor(x / 1000)) + " ribu";
+      str = convert(Math.floor(x / 1000)) + " Ribu";
       if (x % 1000 !== 0) str += " " + convert(x % 1000);
     } else if (x < 1_000_000_000) {
-      str = convert(Math.floor(x / 1_000_000)) + " juta";
+      str = convert(Math.floor(x / 1_000_000)) + " Juta";
       if (x % 1_000_000 !== 0) str += " " + convert(x % 1_000_000);
     } else if (x < 1_000_000_000_000) {
-      str = convert(Math.floor(x / 1_000_000_000)) + " milyar";
+      str = convert(Math.floor(x / 1_000_000_000)) + " Milyar";
       if (x % 1_000_000_000 !== 0) str += " " + convert(x % 1_000_000_000);
     } else if (x < 1_000_000_000_000_000) {
-      str = convert(Math.floor(x / 1_000_000_000_000)) + " triliun";
+      str = convert(Math.floor(x / 1_000_000_000_000)) + " Triliun";
       if (x % 1_000_000_000_000 !== 0) str += " " + convert(x % 1_000_000_000_000);
     }
 

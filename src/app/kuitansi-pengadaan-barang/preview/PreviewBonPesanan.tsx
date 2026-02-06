@@ -43,15 +43,15 @@ export default function PreviewBonPesanan({ data }: Props) {
           </div>
 
           <div className="bp-header-right">
-            {data.tempat || "........"}, {formatTanggalDDMMYYYY(data.tanggal)}
+            {data.tempatSurat || "........"}, {formatTanggalDDMMYYYY(data.tanggal)}
           </div>
         </div>
 
         {/* TUJUAN */}
         <div className="bp-tujuan">
           Kepada <br />
-          Yth. Direktur CV {data.namaToko || "........"} <br />
-          di {data.tempat || "........"}
+          Yth.{data.namaToko || "........"} <br />
+          di {data.tempatTujuan || "........"}
         </div>
 
         <h2 className="bp-title">BON PESANAN</h2>

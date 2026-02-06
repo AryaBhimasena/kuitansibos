@@ -34,20 +34,6 @@ export default function TabPersetujuan({ data, setData }) {
         />
       </div>
 
-      <div className="form-group">
-        <label>Tanggal Kuitansi</label>
-        <input
-          type="date"
-          value={data.tanggal}
-          onChange={(e) =>
-            setData(prev => ({
-              ...prev,
-              tanggal: e.target.value
-            }))
-          }
-        />
-      </div>
-
       <h4>Disetujui Oleh</h4>
 
       <div className="form-group">
