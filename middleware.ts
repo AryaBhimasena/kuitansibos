@@ -4,13 +4,18 @@ import type { NextRequest } from "next/server";
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // ===== IZINKAN HANYA ROUTE INI =====
-  if (
-    pathname === "/" ||
-    pathname === "/404" ||
-    pathname.startsWith("/_next") ||
-    pathname.startsWith("/favicon")
-  ) {
+  // ===== TARGET ROUTE SAJA =====
+  const protectedRoutes = [
+    "/app/dashboard",
+    "/app/kuitansi",
+  ];
+
+  const isProtectedRoute = protectedRoutes.some(
+    (route) => pathname === route || pathname.startsWith(route + "/")
+  );
+
+  // Jika bukan route target → lewatkan
+  if (!isProtectedRoute) {
     return NextResponse.next();
   }
 
@@ -22,12 +27,13 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/404", request.url));
   }
 
-  // ===== SEMUA ROUTE LAIN DIPAKSA KE LOGIN =====
-  return NextResponse.redirect(new URL("/", request.url));
+  return NextResponse.next();
 }
 
+/* ===== MATCHER DIKERUCUTKAN ===== */
 export const config = {
   matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|api).*)",
+    "/app/dashboard/:path*",
+    "/app/kuitansi/:path*",
   ],
 };
