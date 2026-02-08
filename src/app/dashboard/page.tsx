@@ -5,6 +5,21 @@ import { useRouter } from "next/navigation";
 import "@/styles/pages/dashboard.css";
 import { Pencil, Trash2 } from "lucide-react";
 
+function jenisLabelToSlug(jenis: string) {
+  switch (jenis) {
+    case "Pengadaan Barang":
+      return "pengadaan";
+    case "Konsumsi":
+      return "konsumsi";
+    case "Perjalanan Dinas":
+      return "perjalanan";
+    case "Honor":
+      return "honor";
+    default:
+      return "pengadaan";
+  }
+}
+
 function formatTanggalIndo(dateStr: string) {
   if (!dateStr) return "-";
 
@@ -198,11 +213,20 @@ const handleDelete = async (no: string) => {
 				  <div className="aksi-group">
 					<button
 					  className="btn-neo edit"
-					  onClick={() => router.push(`/kuitansi?id=${item.no}`)}
+					  onClick={() => {
+						const jenisSlug = jenisLabelToSlug(item.jenis);
+
+						router.push(
+						  `/kuitansi?id=${item.no}&jenis=${jenisSlug}&title=${encodeURIComponent(
+							`Kuitansi ${item.jenis}`
+						  )}`
+						);
+					  }}
 					  title="Edit"
 					>
 					  <Pencil size={16} />
 					</button>
+
 
 					<button
 					  className="btn-neo delete"
