@@ -5,21 +5,6 @@ import { useRouter } from "next/navigation";
 import "@/styles/pages/dashboard.css";
 import { Pencil, Trash2 } from "lucide-react";
 
-function jenisLabelToSlug(jenis: string) {
-  switch (jenis) {
-    case "Pengadaan Barang":
-      return "pengadaan";
-    case "Konsumsi":
-      return "konsumsi";
-    case "Perjalanan Dinas":
-      return "perjalanan";
-    case "Honor":
-      return "honor";
-    default:
-      return "pengadaan";
-  }
-}
-
 function formatTanggalIndo(dateStr: string) {
   if (!dateStr) return "-";
 
@@ -30,6 +15,21 @@ function formatTanggalIndo(dateStr: string) {
     month: "long",
     year: "numeric"
   });
+}
+
+function mapJenisToCase(jenis) {
+  switch (jenis) {
+    case "Pengadaan Barang":
+      return "pengadaan";
+    case "Konsumsi":
+      return "konsumsi";
+    case "Perjalanan Dinas":
+      return "perjalanan";
+    case "Honor":
+      return "honor";
+    default:
+      return null;
+  }
 }
 
 export default function DashboardPage() {
@@ -172,19 +172,21 @@ const handleDelete = async (no: string) => {
 
 			  {openDropdown && (
 				<ul className="dropdown-menu">
-					<li
-					  onClick={() =>
-						router.push(
-						  "/kuitansi?jenis=pengadaan&title=Kuitansi%20Pengadaan%20Barang"
-						)
-					  }
-					>
-					  Buat Kuitansi Barang
-					</li>
+				<li onClick={() => router.push("/kuitansi/pengadaan/new")}>
+				  Buat Kuitansi Barang
+				</li>
 
-				  <li>Buat Kuitansi Makan/Minum</li>
-				  <li>Buat Kuitansi Perjalanan Dinas</li>
-				  <li>Buat Kuitansi Honor</li>
+				<li onClick={() => router.push("/kuitansi/konsumsi/new")}>
+				  Buat Kuitansi Makan/Minum
+				</li>
+
+				<li onClick={() => router.push("/kuitansi/perjalanan/new")}>
+				  Buat Kuitansi Perjalanan Dinas
+				</li>
+
+				<li onClick={() => router.push("/kuitansi/honor/new")}>
+				  Buat Kuitansi Honor
+				</li>
 				</ul>
 			  )}
 			</div>
@@ -214,19 +216,20 @@ const handleDelete = async (no: string) => {
 					<button
 					  className="btn-neo edit"
 					  onClick={() => {
-						const jenisSlug = jenisLabelToSlug(item.jenis);
+						const caseKey = mapJenisToCase(item.jenis);
+						if (!caseKey) {
+						  alert("Jenis kuitansi tidak dikenali");
+						  return;
+						}
 
 						router.push(
-						  `/kuitansi?id=${item.no}&jenis=${jenisSlug}&title=${encodeURIComponent(
-							`Kuitansi ${item.jenis}`
-						  )}`
+						  `/kuitansi/${caseKey}/edit/${item.no}`
 						);
 					  }}
 					  title="Edit"
 					>
 					  <Pencil size={16} />
 					</button>
-
 
 					<button
 					  className="btn-neo delete"
