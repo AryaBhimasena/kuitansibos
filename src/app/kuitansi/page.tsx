@@ -1,10 +1,19 @@
-import { Suspense } from "react";
-import KuitansiClient from "./KuitansiClient";
+import KuitansiOrchestratorPage from "./kuitansiClient";
 
-export default function Page() {
+export default function Page({
+  searchParams,
+}: {
+  searchParams: {
+    id?: string;
+    jenis?: string;
+    title?: string;
+  };
+}) {
   return (
-    <Suspense fallback={<div style={{ padding: 24 }}>Memuat kuitansi…</div>}>
-      <KuitansiClient />
-    </Suspense>
+    <KuitansiOrchestratorPage
+      id={searchParams.id}
+      jenis={searchParams.jenis}
+      title={searchParams.title}
+    />
   );
 }
