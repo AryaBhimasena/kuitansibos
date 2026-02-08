@@ -12,12 +12,14 @@ const pages = [
   KuitansiLima,
 ];
 
+const PREVIEW_SUPPORTED = ["BARANG", "KONSUMSI"];
+
 export function renderKuitansiPreview(
   jenis: string,
   payload: any,
   page: number
 ) {
-  if (jenis !== "BARANG") return null;
+  if (!PREVIEW_SUPPORTED.includes(jenis)) return null;
 
   const PageComponent = pages[page];
   if (!PageComponent) return null;
@@ -27,7 +29,7 @@ export function renderKuitansiPreview(
 
 // ✅ khusus untuk export PDF
 export function renderAllKuitansiPreview(jenis: string, payload: any) {
-  if (jenis !== "BARANG") return null;
+  if (!PREVIEW_SUPPORTED.includes(jenis)) return null;
 
   return pages.map((PageComponent, i) => (
     <div key={i} className="preview-paper pdf-page">

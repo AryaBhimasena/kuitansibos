@@ -19,6 +19,25 @@
   padding: 20px 24px;
   box-shadow: 4px 4px 0 #1f2937;
   margin-bottom: 24px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* kiri: H1 + baris bawah */
+.header-left {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* baris P + Logout */
+.header-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 6px;
 }
 
 .dashboard-header h1 {
@@ -28,10 +47,23 @@
 }
 
 .dashboard-header p {
-  margin-top: 6px;
+  margin: 0;
   font-size: 14px;
   color: #374151;
 }
+
+.logout-text {
+  cursor: pointer;
+  color: #c0392b;
+  font-weight: 600;
+  transition: 0.2s;
+}
+
+.logout-text:hover {
+  text-decoration: underline;
+  color: #e74c3c;
+}
+
 
 /* ===============================
    KPI CARDS
@@ -97,12 +129,12 @@
   padding: 16px 20px;
   border-bottom: 2px solid #1f2937;
   display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
 }
 
+/* TITLE */
 .table-title h3 {
   margin: 0;
   font-size: 16px;
@@ -114,22 +146,41 @@
   color: #6b7280;
 }
 
+/* ===============================
+   ACTIONS (SEARCH - SELECT - BUTTON)
+================================ */
 .table-actions {
   display: flex;
+  align-items: center;
   gap: 10px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* jangan wrap default */
 }
 
 /* ===============================
-   INPUT & SELECT
+   INPUT & SELECT (FIX WIDTH)
 ================================ */
-.input-search,
-.input-select {
+.input-search {
+  width: 180px;
+  min-width: 180px;
+  max-width: 180px;
   padding: 8px 10px;
   border: 2px solid #1f2937;
   border-radius: 8px;
   font-size: 13px;
   background: #ffffff;
+  box-sizing: border-box;
+}
+
+.input-select {
+  width: 160px;
+  min-width: 160px;
+  max-width: 160px;
+  padding: 8px 10px;
+  border: 2px solid #1f2937;
+  border-radius: 8px;
+  font-size: 13px;
+  background: #ffffff;
+  box-sizing: border-box;
 }
 
 .input-search:focus,
@@ -139,10 +190,13 @@
 }
 
 /* ===============================
-   PRIMARY BUTTON
+   PRIMARY BUTTON (FIX WIDTH)
 ================================ */
 .btn-primary {
-  padding: 8px 14px;
+  width: 150px;
+  min-width: 150px;
+  max-width: 150px;
+  padding: 8px 0;
   background: #2563eb;
   color: #ffffff;
   border: 2px solid #1f2937;
@@ -151,10 +205,35 @@
   font-weight: 600;
   cursor: pointer;
   box-shadow: 3px 3px 0 #1f2937;
+  white-space: nowrap;
+  text-align: center;
 }
 
 .btn-primary:hover {
   background: #1d4ed8;
+}
+
+/* ===============================
+   RESPONSIVE (SMALL SCREEN)
+================================ */
+@media (max-width: 768px) {
+  .table-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .table-actions {
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .input-search,
+  .input-select,
+  .btn-primary {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+  }
 }
 
 /* ===============================

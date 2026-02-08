@@ -11,13 +11,15 @@ function FormPlaceholder({ title }: { title: string }) {
   );
 }
 
+const FORM_SUPPORTED = ["BARANG", "KONSUMSI"];
+
 export function renderKuitansiForm(
   jenis: string,
   step: number,
   payload: any,
   setPayload: any
 ) {
-  if (jenis !== "BARANG") return null;
+  if (!FORM_SUPPORTED.includes(jenis)) return null;
 
   switch (step) {
     case 0:

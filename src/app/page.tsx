@@ -15,35 +15,34 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (loading) return;
+	const handleSubmit = async (e: React.FormEvent) => {
+	  e.preventDefault();
+	  if (loading) return;
 
-    setLoading(true);
-    setError(null);
+	  setLoading(true);
+	  setError(null);
 
-    try {
-      const res = await login(username, password);
+	  try {
+		const res = await login(username, password);
 
-      if (!res.success) {
-        setError(res.message);
-        setLoading(false);
-        return;
-      }
+		if (!res.success) {
+		  setError(res.message);
+		  setLoading(false);
+		  return;
+		}
 
-      localStorage.setItem(
-        "auth_user",
-        JSON.stringify(res.data)
-      );
+		const userData = JSON.stringify(res.data);
 
-      // Redirect ke dashboard
-      router.push("/dashboard");
+		// localStorage (frontend)
+		localStorage.setItem("auth_user", userData);
 
-    } catch (err: any) {
-      setError("Gagal menghubungi server");
-      setLoading(false);
-    }
-  };
+		router.push("/dashboard");
+
+	  } catch (err: any) {
+		setError("Gagal menghubungi server");
+		setLoading(false);
+	  }
+	};
 
   return (
     <div className="login-wrapper">

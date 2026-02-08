@@ -35,37 +35,55 @@ function mapJenisToCase(jenis) {
 export default function DashboardPage() {
   const router = useRouter();
 
+  // ===== SEMUA STATE DI ATAS =====
+  const [isMounted, setIsMounted] = useState(false);
+  const [lastReceipts, setLastReceipts] = useState<any[]>([]);
+  const [searchNo, setSearchNo] = useState("");
+  const [filterJenis, setFilterJenis] = useState("");
+  const [openDropdown, setOpenDropdown] = useState(false);
+
   const today = new Date();
   const month = today.getMonth() + 1;
-
   const tahap =
     month <= 6 ? "Tahap 1 (Januari - Juni)" : "Tahap 2 (Juli - Desember)";
 
-	const [lastReceipts, setLastReceipts] = useState<any[]>([]);
+  // ===== EFFECT MOUNT =====
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  // ===== FETCH DATA =====
+  useEffect(() => {
+    if (!isMounted) return;
+
+    fetch("https://script.google.com/macros/s/AKfycbxRd37N6y8vsTgdtW0xcl9f3HWqUu4r1pwWr_LQeqb4bBUOm9k9XzXQqcGvdq2WzPm64w/exec?action=lastKuitansi")
+      .then(res => res.json())
+      .then(json => {
+        if (json.success) {
+          setLastReceipts(json.data);
+        }
+      })
+      .catch(err => console.error("Fetch dashboard error:", err));
+  }, [isMounted]);
+
+  // ===== GUARD RENDER =====
+  if (!isMounted) return null;
 
   /* ================= KPI ================= */
   const totalPerKategori = {
     pengadaan: lastReceipts
       .filter(r => r.jenis === "Pengadaan Barang")
       .reduce((s, r) => s + r.nominal, 0),
-
     perjalanan: lastReceipts
       .filter(r => r.jenis === "Perjalanan Dinas")
       .reduce((s, r) => s + r.nominal, 0),
-
     konsumsi: lastReceipts
       .filter(r => r.jenis === "Konsumsi")
       .reduce((s, r) => s + r.nominal, 0),
-
     honor: lastReceipts
       .filter(r => r.jenis === "Honor")
       .reduce((s, r) => s + r.nominal, 0),
   };
-
-  /* ================= STATE FILTER ================= */
-  const [searchNo, setSearchNo] = useState("");
-  const [filterJenis, setFilterJenis] = useState("");
-  const [openDropdown, setOpenDropdown] = useState(false);
 
   const filteredData = lastReceipts.filter(item => {
     const matchNo = item.no.toLowerCase().includes(searchNo.toLowerCase());
@@ -73,33 +91,30 @@ export default function DashboardPage() {
     return matchNo && matchJenis;
   });
 
-useEffect(() => {
-  fetch("https://script.google.com/macros/s/AKfycbxRd37N6y8vsTgdtW0xcl9f3HWqUu4r1pwWr_LQeqb4bBUOm9k9XzXQqcGvdq2WzPm64w/exec?action=lastKuitansi")
-    .then(res => res.json())
-    .then(json => {
-      if (json.success) {
-        setLastReceipts(json.data);
-      }
-    })
-    .catch(err => console.error("Fetch dashboard error:", err));
-}, []);
-
-const handleDelete = async (no: string) => {
-  if (!confirm("Yakin hapus kuitansi ini?")) return;
-
-  // nanti sambungkan ke GAS
-  alert("Hapus kuitansi: " + no);
-};
+  const handleLogout = () => {
+    if (!confirm("Yakin ingin logout?")) return;
+    localStorage.removeItem("auth_user");
+    router.replace("/");
+  };
 
   return (
     <div className="dashboard-wrapper">
       {/* HEADER */}
-      <div className="dashboard-header">
-        <h1>Dashboard Pemanfaatan Dana BOSP</h1>
-        <p>
-          Periode Aktif: <strong>{tahap}</strong>
-        </p>
-      </div>
+		<div className="dashboard-header">
+		  <div className="header-left">
+			<h1>Dashboard Pemanfaatan Dana BOSP</h1>
+
+			<div className="header-bottom">
+			  <p>
+				Periode Aktif: <strong>{tahap}</strong>
+			  </p>
+
+			  <span className="logout-text" onClick={handleLogout}>
+				Logout
+			  </span>
+			</div>
+		  </div>
+		</div>
 
       {/* KPI CARDS - STATIS */}
       <div className="menu-grid">

@@ -73,10 +73,33 @@ useEffect(() => {
 }, [step]);
 
 useEffect(() => {
-  console.log("CLIENT PROPS:");
-  console.log("mode =", mode);
-  console.log("id =", id);
-}, [mode, id]);
+  console.log("RAW JENIS FROM ROUTE =", jenis);
+  console.log("MAPPED JENIS =", kuitansiJenis);
+}, [jenis, kuitansiJenis]);
+
+const handleSubmit = async () => {
+  const formData = new FormData();
+
+  formData.append("jenis", kuitansiJenis);
+  formData.append("payload", JSON.stringify(payload));
+
+  if (mode === "edit") {
+    formData.append("action", "updateKuitansi");
+    formData.append("id", id!);
+  } else {
+    formData.append("action", "saveKuitansi");
+  }
+
+  const res = await fetch('https://script.google.com/macros/s/AKfycbxRd37N6y8vsTgdtW0xcl9f3HWqUu4r1pwWr_LQeqb4bBUOm9k9XzXQqcGvdq2WzPm64w/exec', {
+    method: "POST",
+    body: formData
+  });
+
+  const result = await res.json();
+
+  if (!result.success) alert(result.message);
+  else alert("Berhasil disimpan");
+};
 
 useEffect(() => {
   if (!mode) return; // tunggu hydration
@@ -173,30 +196,6 @@ const handleExportPDF = async () => {
   const noKuitansi = payload?.kuitansi?.noKuitansi || "nonumber";
 
   pdf.save(`${jenisNama}-${noKuitansi}.pdf`);
-};
-
-const handleSubmit = async () => {
-  const formData = new FormData();
-
-  formData.append("jenis", jenis);
-  formData.append("payload", JSON.stringify(payload));
-
-  if (mode === "edit") {
-    formData.append("action", "updateKuitansi");
-    formData.append("id", id!);
-  } else {
-    formData.append("action", "saveKuitansi");
-  }
-
-  const res = await fetch(GAS_URL, {
-    method: "POST",
-    body: formData
-  });
-
-  const result = await res.json();
-
-  if (!result.success) alert(result.message);
-  else alert("Berhasil disimpan");
 };
 
   return (

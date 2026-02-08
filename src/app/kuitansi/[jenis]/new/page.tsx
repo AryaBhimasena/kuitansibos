@@ -1,12 +1,19 @@
+"use client";
+
+import { useParams } from "next/navigation";
 import KuitansiOrchestratorPage from "@/components/KuitansiUmum";
 
-export default async function Page({ params }) {
-	
-  const { jenis } = await params;
-	
+export default function Page() {
+  const params = useParams();
+  const jenis = params?.jenis as string;
+
+  if (!jenis) {
+    return <div>Jenis kuitansi tidak ditemukan</div>;
+  }
+
   return (
     <KuitansiOrchestratorPage
-      jenis={params.jenis}
+      jenis={jenis}
       mode="create"
     />
   );

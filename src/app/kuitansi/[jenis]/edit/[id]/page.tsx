@@ -1,9 +1,16 @@
-// app/kuitansi/[jenis]/edit/[id]/page.tsx
+"use client";
 
+import { useParams } from "next/navigation";
 import KuitansiOrchestratorPage from "@/components/KuitansiUmum";
 
-export default async function Page({ params }) {
-  const { jenis, id } = await params;
+export default function Page() {
+  const params = useParams();
+  const jenis = params?.jenis as string;
+  const id = params?.id as string;
+
+  if (!jenis || !id) {
+    return <div>Data tidak lengkap</div>;
+  }
 
   return (
     <KuitansiOrchestratorPage
