@@ -1,0 +1,207 @@
+/* =========================================================
+   ROOT
+   ========================================================= */
+.preview-kuitansi {
+  width: 100%;
+  font-size: 12px;
+  line-height: 1.5;
+  font-family: "Inter", Arial, sans-serif;
+  color: #000;
+}
+
+/* =========================================================
+   HEADER RIGHT
+   ========================================================= */
+.preview-header-top {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 16px; /* jarak ke title */
+}
+
+.header-info {
+  width: 220px;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 110px 10px 1fr;
+}
+
+/* =========================================================
+   TITLE
+   ========================================================= */
+.preview-title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 18px;
+  width: 100%;
+  text-decoration: underline;
+}
+
+.preview-title span,
+.preview-title {
+  display: inline-block;
+  padding-bottom: 2px;
+}
+
+/* =========================================================
+   INFO (PENERIMA)
+   ========================================================= */
+.preview-info {
+  margin-bottom: 14px;
+  padding-left: 32px; /* indent dari tepi kertas */
+}
+
+.info-row {
+  display: grid;
+  grid-template-columns: 180px 10px 1fr;
+  margin-bottom: 4px;
+}
+
+.info-value.bold {
+  font-weight: 700;
+}
+
+/* =========================================================
+   TABLE
+   ========================================================= */
+.preview-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 6px;
+}
+
+.preview-table th,
+.preview-table td {
+  border: 1px solid #000;
+  padding: 5px 6px;
+  vertical-align: top;
+}
+
+.preview-table th {
+  text-align: center;
+  font-weight: 700;
+}
+
+.preview-table td:nth-child(1),
+.preview-table td:nth-child(3),
+.preview-table td:nth-child(4) {
+  text-align: center;
+  width: 40px;
+}
+
+.preview-table td:nth-child(2){
+  max-width: 300px;
+}
+
+.harga-cell,
+.jumlah-cell {
+  text-align: right;
+}
+
+/* =========================================================
+   TABLE FOOTER (JUMLAH / PAJAK)
+   ========================================================= */
+.table-footer td {
+  font-weight: normal;
+}
+
+.table-footer td:first-child {
+  padding-left: 28px; /* indent kiri */
+}
+
+.table-footer.bold td {
+  font-weight: 700;
+  background: #f3f3f3; /* aksen */
+}
+
+.table-footer.bold .jumlah-cell {
+  font-size: 13px;
+}
+
+/* =========================================================
+   BOTTOM SECTION (BANK & PENERIMA)
+   ========================================================= */
+.preview-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
+  padding: 0 32px; /* tidak mepet tepi */
+}
+
+.bottom-left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.bottom-row {
+  display: grid;
+  grid-template-columns: 120px 10px 1fr;
+}
+
+.bottom-label {
+  white-space: nowrap;
+}
+
+.bottom-colon {
+  text-align: center;
+}
+
+.bottom-value {
+  white-space: nowrap;
+}
+
+.bottom-right {
+  text-align: center;
+  min-width: 180px;
+}
+
+.ttd-space {
+  height: 100px;
+}
+
+.ttd-name {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* =========================================================
+   TOTAL TEXT (TERBILANG / JUMLAH)
+   ========================================================= */
+.preview-total-text {
+  margin-top: 14px;
+  padding-left: 32px;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+.total-line {
+  display: inline-block;
+  margin-left: 8px;
+  border-bottom: 1px solid #000;
+  min-width: 300px;
+}
+
+/* =========================================================
+   FOOTER – LUNAS
+   ========================================================= */
+.preview-lunas {
+  margin-top: 20px;
+  margin-left: 60%; /* geser ke kanan ±40% */
+  font-size: 12px;
+  text-align: left;
+}
+
+/* =========================================================
+   SIGNATURE BAWAH
+   ========================================================= */
+.preview-signature {
+  margin-top: 26px;
+  padding: 0 48px; /* tidak mepet tepi */
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  line-height: 1.6;
+}

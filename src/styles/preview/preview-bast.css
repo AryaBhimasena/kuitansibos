@@ -186,3 +186,24 @@
     -webkit-print-color-adjust: exact;
   }
 }
+
+/* Table untuk PIHAK PERTAMA & KEDUA (tanpa border & tanpa style tabel global) */
+.bast-party-table {
+  border: none !important;
+  border-collapse: collapse;
+  width: auto;
+}
+
+.bast-party-table td,
+.bast-party-table th {
+  border: none !important;
+  padding: 2px 4px;
+  vertical-align: top;
+}
+
+.bast-party-section table,
+.bast-party-section td,
+.bast-party-section th {
+  border: none !important;
+  background: transparent;
+}

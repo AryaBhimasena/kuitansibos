@@ -1,4 +1,33 @@
 /* ===============================
+   BASE RESET
+================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+/* ===============================
+   BASE TYPOGRAPHY
+================================ */
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #111;
+  background: #f6f6f6;
+}
+
+
+/* ===============================
    PAGE LAYOUT
 ================================ */
 .kuitansi-page {

@@ -59,6 +59,10 @@
   font-size: 12pt;
 }
 
+.preview-header-table {
+  border: none !important;
+}
+
 .preview-header td {
   padding: 2px 4px;
   vertical-align: top;

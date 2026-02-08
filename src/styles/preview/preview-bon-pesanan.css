@@ -66,6 +66,12 @@
   margin-bottom: 7px;
 }
 
+.bp-body-uraian {
+  text-align: center;
+  font-size: 12pt;
+  margin: 20px 0;
+}
+
 /* ===============================
    TABLE
 ================================ */
@@ -152,6 +158,44 @@
   text-align: left;    /* teks tetap rata kiri */
   line-height: 1.4;
   width: 160px;        /* opsional, biar rapi */
+  font-size : 12pt;
+}
+
+.bp-terbilang {
+  margin-top: 16px;
+  font-style: italic;
+}
+
+.bp-date-place {
+  margin-top: 20px;
+  text-align: right;
+}
+
+.bp-signature-area {
+  margin-top: 40px;
+}
+
+.bp-sign-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bp-sign-row.center {
+  margin-top: 40px;
+  text-align: center;
+  flex-direction: column;
+}
+
+.bp-sign-col {
+  width: 45%;
+}
+
+.bp-sign-col.left {
+  text-align: left;
+}
+
+.bp-sign-col.right {
+  text-align: center;
 }
 
 /* ===============================

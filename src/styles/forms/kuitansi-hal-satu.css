@@ -1,0 +1,196 @@
+/* ================= FORM CARD ================= */
+.form-card {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 16px 16px 20px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* ================= TITLE ================= */
+.form-card h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.form-card h5 {
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  margin: 8px 0 2px;
+}
+
+/* ================= FORM GROUP ================= */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #374151;
+}
+
+/* ================= INPUT ================= */
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 13px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+/* focus */
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.15);
+}
+
+/* ================= DIVIDER ================= */
+.form-card hr {
+  border: none;
+  border-top: 1px dashed #e5e7eb;
+  margin: 8px 0;
+}
+
+/* ================= PLACEHOLDER BOX ================= */
+.form-placeholder-box {
+  width: 100%;
+  padding: 14px;
+  border: 1px dashed #d1d5db;
+  border-radius: 8px;
+  text-align: center;
+  color: #6b7280;
+  background: #f9fafb;
+}
+
+/* ================= SMALL TEXT ================= */
+.form-card p {
+  margin: 0;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+/* ================= DATA BARANG ================= */
+.barang-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.barang-item {
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #e5e7eb;
+}
+
+.barang-item:last-child {
+  border-bottom: none;
+}
+
+.barang-nama {
+  width: 100%;
+  padding: 8px 10px;
+  font-size: 13px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.barang-detail {
+  display: grid;
+  grid-template-columns:
+    60px      /* qty */
+    60px       /* satuan */
+    120px     /* harga */
+    auto      /* subtotal */
+    32px;     /* hapus */
+  gap: 8px;
+  align-items: center;
+  margin-top: 6px;
+}
+
+.barang-detail input {
+  padding: 7px 9px;
+  font-size: 13px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  box-sizing: border-box;
+}
+
+.barang-detail .subtotal {
+  font-size: 13px;
+  font-weight: 500;
+  text-align: right;
+  color: #111827;
+  white-space: nowrap;
+}
+
+.btn-remove {
+  background: transparent;
+  border: none;
+  color: #ef4444;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.btn-add {
+  margin-top: 12px;
+  padding: 8px 12px;
+  font-size: 13px;
+  border-radius: 6px;
+  border: 1px dashed #2563eb;
+  background: #eff6ff;
+  color: #2563eb;
+  cursor: pointer;
+}
+
+.btn-add:hover {
+  background: #dbeafe;
+}
+
+/* ===== PAJAK ROW ===== */
+.pajak-row {
+  display: grid;
+  grid-template-columns: auto 90px auto 90px;
+  gap: 10px 12px;
+  align-items: center;
+  max-width: 420px; /* supaya gak melebar ke kanan */
+  margin-top: 12px;
+}
+
+/* label */
+.pajak-row label {
+  font-size: 13px;
+  color: #374151;
+  white-space: nowrap;
+}
+
+/* input angka */
+.pajak-row input {
+  width: 100%;
+  padding: 6px 8px;
+  font-size: 13px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  text-align: right;
+}

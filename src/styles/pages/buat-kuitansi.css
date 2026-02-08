@@ -1,0 +1,341 @@
+/* =========================================================
+   GLOBAL RESET
+   ========================================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: "Inter", system-ui, -apple-system, sans-serif;
+  background: #fefefe;
+  color: #000;
+}
+
+/* =========================================================
+   ROOT LAYOUT
+   ========================================================= */
+.kuitansi-orchestrator {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: #f4f4f4;
+  overflow: hidden;
+}
+
+/* =========================================================
+   LEFT PANEL – FORM (30%)
+   ========================================================= */
+.orchestrator-form {
+  width: 30%;
+  min-width: 360px;
+  height: 100%;
+  padding: 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  background: #ffffff;
+  border-right: 4px solid #000;
+}
+
+/* ---------- HEADER ---------- */
+.form-header {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-header h2 {
+  font-size: 18px;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.form-header select {
+  padding: 8px 10px;
+  font-size: 14px;
+  font-weight: 600;
+
+  border: 3px solid #000;
+  background: #fff;
+  color: #000;
+  outline: none;
+}
+
+.form-header select:focus {
+  background: #ffeb3b;
+}
+
+/* ---------- STEP INDICATOR ---------- */
+.step-indicator {
+  font-size: 13px;
+  font-weight: 700;
+  padding: 6px 8px;
+
+  border: 2px solid #000;
+  background: #e0e0e0;
+}
+
+/* ---------- FORM BODY ---------- */
+.form-body {
+  flex: 1;
+  overflow: hidden;
+}
+
+/* ---------- FORM CARD ---------- */
+.form-card {
+  height: 100%;
+  padding: 16px;
+
+  background: #ffffff;
+  border: 4px solid #000;
+  box-shadow: 6px 6px 0 #000;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-card h4 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.form-card p {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+/* ---------- FOOTER NAV ---------- */
+.form-footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.form-footer button {
+  flex: 1;
+  padding: 8px 0;
+
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+
+  background: #ffffff;
+  border: 3px solid #000;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #000;
+}
+
+.form-footer button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.form-footer button:not(:disabled):active {
+  transform: translate(4px, 4px);
+  box-shadow: none;
+}
+
+/* ---------- SUBMIT ---------- */
+.btn-submit {
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 900;
+  text-transform: uppercase;
+
+  background: #000;
+  color: #fff;
+
+  border: 3px solid #000;
+  cursor: pointer;
+}
+
+.btn-submit:active {
+  background: #ff3d00;
+}
+
+/* =========================================================
+   RIGHT PANEL – PREVIEW (70%)
+   ========================================================= */
+.orchestrator-preview {
+  width: 70%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #dcdcdc;
+  overflow: hidden;
+}
+
+/* ---------- TOOLBAR ---------- */
+.preview-toolbar {
+  height: 48px;
+  padding: 6px 10px;
+
+  display: flex;
+  gap: 8px;
+
+  background: #ffffff;
+  border-bottom: 4px solid #000;
+  flex-shrink: 0;
+}
+
+/* ---------- VIEWPORT (AREA YANG DIHITUNG) ---------- */
+.preview-viewport {
+  flex: 1;                     /* sisa tinggi setelah toolbar */
+  background: #bdbdbd;
+
+  overflow: auto;              /* scrollbar hanya muncul saat perlu */
+}
+
+/* ---------- CENTERING LAYER ---------- */
+.viewport-center {
+  min-width: 100%;
+  min-height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+/* ---------- CANVAS (ZOOM TARGET) ---------- */
+.preview-canvas {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  transform-origin: center top;
+}
+
+/* =========================================================
+   PAPER (KUITANSI KEDINASAN)
+   ========================================================= */
+.preview-paper {
+  width: 794px;     /* A4 portrait */
+  height: 1123px;
+
+  background: #ffffff;
+
+  padding: 32px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.pdf-page {
+  background: white;
+  width: 794px;
+  height: 1123px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+
+/* ================================
+   PAYLOAD MODAL
+   ================================ */
+
+.payload-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.55); /* slate-900 */
+  backdrop-filter: blur(6px);
+  z-index: 9999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.payload-card {
+  width: 90%;
+  max-width: 820px;
+  max-height: 80vh;
+
+  background: #ffffff;
+  border-radius: 14px;
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.15),
+    0 10px 10px -5px rgba(0, 0, 0, 0.08);
+
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: payloadFadeIn 0.18s ease-out;
+}
+
+/* ===== HEADER ===== */
+.payload-card header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 14px 18px;
+  background: #0f172a; /* slate-900 */
+  color: #ffffff;
+}
+
+.payload-card header span {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.payload-card header button {
+  background: transparent;
+  border: none;
+  color: #cbd5f5;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.payload-card header button:hover {
+  color: #ffffff;
+}
+
+/* ===== BODY ===== */
+.payload-card pre {
+  margin: 0;
+  padding: 16px 18px;
+
+  background: #020617; /* almost black */
+  color: #e5e7eb;
+
+  font-size: 12px;
+  line-height: 1.6;
+  font-family: "JetBrains Mono", monospace;
+
+  overflow: auto;
+}
+
+/* ===== ANIMATION ===== */
+@keyframes payloadFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
