@@ -151,6 +151,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  gap: 100px;
 }
 
 .bast-sig-row-center {
@@ -160,12 +161,12 @@
 }
 
 .bast-sig-box {
-  text-align: center;
-  width: 40%;
+  text-align: left;
   min-height: 56px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin: auto;
 }
 
 .bast-sig-space {

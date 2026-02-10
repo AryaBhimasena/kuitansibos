@@ -135,6 +135,26 @@ export default function KuitansiBarangHalamanDua({
 
       {/* ================= HEADER : ISI SURAT ================= */}
       <h5>Isi Surat</h5>
+	  
+      <div className="form-group">
+        <label>Periode Anggaran</label>
+        <input
+          rows={3}
+          value={data.bonPesanan.isi.periodeAnggaran}
+          onChange={e =>
+            setData((prev: any) => ({
+              ...prev,
+              bonPesanan: {
+                ...prev.bonPesanan,
+                isi: {
+                  ...prev.bonPesanan.isi,
+                  periodeAnggaran: e.target.value
+                }
+              }
+            }))
+          }
+        />
+      </div>
 
       <div className="form-group">
         <label>Uraian Kegiatan</label>

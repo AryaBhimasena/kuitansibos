@@ -157,7 +157,7 @@
   margin-left: auto;   /* dorong ke kanan */
   text-align: left;    /* teks tetap rata kiri */
   line-height: 1.4;
-  width: 160px;        /* opsional, biar rapi */
+  width: 220px;        /* opsional, biar rapi */
   font-size : 12pt;
 }
 
@@ -178,6 +178,7 @@
 .bp-sign-row {
   display: flex;
   justify-content: space-between;
+  width: 100%;
 }
 
 .bp-sign-row.center {
@@ -186,12 +187,18 @@
   flex-direction: column;
 }
 
+.rata-kiri {
+  margin: auto;
+  text-align: left !important;
+}
+
 .bp-sign-col {
   width: 45%;
 }
 
 .bp-sign-col.left {
   text-align: left;
+  margin: auto;
 }
 
 .bp-sign-col.right {

@@ -230,20 +230,36 @@ body {
    PAPER (KUITANSI KEDINASAN)
    ========================================================= */
 .preview-paper {
-  width: 794px;     /* A4 portrait */
-  height: 1123px;
-
   background: #ffffff;
-
   padding: 32px;
   flex-shrink: 0;
   overflow: hidden;
+}
+
+.preview-paper-portrait {
+  width: 794px;
+  height: 1123px;
+}
+
+.preview-paper-landscape {
+  width: 1123px;
+  height: 794px;
 }
 
 .pdf-page {
   background: white;
   width: 794px;
   height: 1123px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.pdf-page-landscape {
+  background: white;
+  height: 794px;
+  width: 1123px;
   margin: 0 auto;
   display: flex;
   justify-content: center;

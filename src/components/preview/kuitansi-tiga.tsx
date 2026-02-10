@@ -145,13 +145,12 @@ function terbilang(n: number): string {
 
 		{/* ================= TANDA TANGAN ================= */}
 		<div className="bp-signature-area">
-
+Barang-barang tersebut telah diterima dengan baik dan cukup
 		  {/* ===== BARIS 1 ===== */}
 		  <div className="bp-sign-row">
 
 			{/* Kolom kiri */}
 			<div className="bp-sign-col left">
-			  Barang-barang tersebut telah diterima dengan baik dan cukup
 			  <br /><br /><br />
 			  <br /><br /><br />
 			  <br /><br /><br />
@@ -181,8 +180,11 @@ function terbilang(n: number): string {
 			<br /><br /><br />
 			<br /><br /><br />
 			<br /><br /><br />
-			<b>{data.penyerahan?.persetujuan?.nama || "Nama Kepala Sekolah"}</b>
+			<div className="rata-kiri">
+				<b>{data.penyerahan?.persetujuan?.nama || "Nama Kepala Sekolah"}</b>
+				<br />
 			NIP. {data.penyerahan?.persetujuan?.nip || "-"}
+			</div>
 		  </div>
 
 		</div>

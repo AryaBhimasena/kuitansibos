@@ -1,0 +1,177 @@
+/* ===============================
+   CONTAINER UTAMA
+================================ */
+
+.form-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.form-card h4 {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #111827;
+}
+
+/* ===============================
+   LIST & EMPTY STATE
+================================ */
+
+.honor-penerima-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.honor-penerima-empty {
+  padding: 12px;
+  font-size: 13px;
+  color: #6b7280;
+  text-align: center;
+  border: 1px dashed #d1d5db;
+  border-radius: 6px;
+  background: #fafafa;
+}
+
+/* ===============================
+   ITEM CARD
+================================ */
+
+.honor-penerima-item {
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 12px;
+  background: #ffffff;
+}
+
+/* ===============================
+   GRID UTAMA
+   Disusun vertikal-friendly
+================================ */
+
+.honor-penerima-grid {
+  display: grid;
+  grid-template-columns: 32px 1fr 1fr;
+  grid-auto-rows: minmax(32px, auto);
+  gap: 8px 8px;
+  align-items: center;
+}
+
+/* Nomor */
+.honor-penerima-no {
+  grid-row: span 5;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: #374151;
+  padding-top: 6px;
+}
+
+/* ===============================
+   INPUT GLOBAL
+================================ */
+
+.honor-penerima-grid input {
+  width: 100%;
+  height: 32px;
+  padding: 4px 8px;
+  font-size: 12.5px;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+  background: #ffffff;
+  color: #111827;
+}
+
+.honor-penerima-grid input::placeholder {
+  color: #9ca3af;
+}
+
+.honor-penerima-grid input:focus {
+  outline: none;
+  border-color: #2563eb;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
+}
+
+.honor-penerima-grid input:nth-of-type(7) {
+  grid-column: 2;
+  width: 170%;
+  max-width: 170%;
+}
+
+.honor-penerima-grid input:nth-of-type(8) {
+  grid-column: 3;
+  max-width: 30%;
+  justify-self: end;
+}
+
+/* ===============================
+   TOTAL DITERIMA
+================================ */
+
+.honor-penerima-total {
+  grid-column: 2 / span 1;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #065f46;
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  border-radius: 4px;
+  padding: 6px 8px;
+  text-align: right;
+  white-space: nowrap;
+  width: 170%;
+  max-width: 170%;
+}
+
+.honor-penerima-remove {
+  grid-column: 3;
+  width:100%;
+}
+
+/* ===============================
+   BUTTON REMOVE
+================================ */
+
+.honor-penerima-remove {
+  grid-column: 3;
+  justify-self: end;
+  align-self: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  border: 1px solid #fecaca;
+  background: #fff1f2;
+  color: #b91c1c;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.honor-penerima-remove:hover {
+  background: #fee2e2;
+}
+
+/* ===============================
+   BUTTON ADD
+================================ */
+
+.honor-penerima-add {
+  margin-top: 12px;
+  width: 100%;
+  height: 36px;
+  border-radius: 6px;
+  border: 1px dashed #2563eb;
+  background: #eff6ff;
+  color: #1d4ed8;
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.honor-penerima-add:hover {
+  background: #dbeafe;
+}

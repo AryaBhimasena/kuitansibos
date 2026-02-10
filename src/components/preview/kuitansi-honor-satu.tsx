@@ -28,7 +28,7 @@ function formatTanggalIndo(dateValue: any) {
   });
 }
 
-export default function PreviewKuitansiSatu({ data, step }: Props) {
+export default function PreviewKuitansiHonorSatu({ data, step }: Props) {
 
   /* ================= PERHITUNGAN ================= */
   const items = data.barang || [];
@@ -95,78 +95,6 @@ export default function PreviewKuitansiSatu({ data, step }: Props) {
         </div>
       </div>
 
-      {/* ================= TABEL ================= */}
-      <table className="preview-table">
-        <thead>
-          <tr>
-            <th>No</th>
-            <th>Uraian</th>
-            <th>Qty</th>
-            <th>Satuan</th>
-            <th>Harga Satuan</th>
-            <th>Jumlah</th>
-          </tr>
-        </thead>
-
-		<tbody>
-		  {items.length === 0 && (
-			<tr>
-			  <td colSpan={6} style={{ textAlign: "center", padding: "12px" }}>
-				Belum ada data barang
-			  </td>
-			</tr>
-		  )}
-
-		  {items.map((item: any, i: number) => {
-			const jumlah = item.qty * item.harga;
-
-			return (
-			  <tr key={i}>
-				<td>{i + 1}</td>
-				<td>{item.namaBarang || "—"}</td>
-				<td>{item.qty}</td>
-				<td>{item.satuan || "-"}</td>
-				<td className="harga-cell">
-				  Rp {item.harga.toLocaleString("id-ID")}
-				</td>
-				<td className="jumlah-cell">
-				  {jumlah.toLocaleString("id-ID")}
-				</td>
-			  </tr>
-			);
-		  })}
-
-		  <tr className="table-footer">
-			<td colSpan={5}>Jumlah</td>
-			<td className="jumlah-cell">
-			  {total.toLocaleString("id-ID")}
-			</td>
-		  </tr>
-
-		  <tr className="table-footer">
-			<td colSpan={5}>PPN ({ppnPersen}%)</td>
-			<td className="jumlah-cell">
-			  {ppn.toLocaleString("id-ID")}
-			</td>
-		  </tr>
-
-		  <tr className="table-footer">
-			<td colSpan={5}>PPh ({pphPersen}%)</td>
-			<td className="jumlah-cell">
-			  {pph.toLocaleString("id-ID")}
-			</td>
-		  </tr>
-
-		  <tr className="table-footer bold">
-			<td colSpan={5}>Jumlah Setelah Pajak</td>
-			<td className="jumlah-cell bold">
-			  {totalAfterTax.toLocaleString("id-ID")}
-			</td>
-		  </tr>
-		</tbody>
-
-      </table>
-
       {/* ================= BAGIAN BAWAH ================= */}
       <div className="preview-bottom">
 		<div className="bottom-left">
@@ -204,7 +132,7 @@ export default function PreviewKuitansiSatu({ data, step }: Props) {
 		</div>
 
         <div className="bottom-right">
-          <div>Yang menerima,</div>
+          <div>Pembuat Daftar,</div>
           <div className="ttd-space" />
 			<div className="ttd-name">
 			  {data.penerima.penerimaDana || "—"}
@@ -215,7 +143,7 @@ export default function PreviewKuitansiSatu({ data, step }: Props) {
       <div className="preview-total-text">
         Jumlah :
         <span className="total-line">
-          Rp {totalAfterTax.toLocaleString("id-ID")}
+          Rp {data.kuitansi.nominalDana.toLocaleString("id-ID")}
         </span>
       </div>
 
@@ -239,7 +167,7 @@ export default function PreviewKuitansiSatu({ data, step }: Props) {
         </div>
 
         <div>
-          {data.penyerahan.lokasiPenyerahan}, {formatTanggalIndo(data.penyerahan.tanggalPengajuan) || ".............."}
+          {data.penyerahan.lokasiPenyerahan || "—"}, {formatTanggalIndo(data.penyerahan.tanggalPengajuan) || ".............."}
           <br />
           {data.penyerahan.pengajuan.jabatan || "Bendahara"}
 			<div className="ttd-space" />

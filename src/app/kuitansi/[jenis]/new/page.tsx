@@ -1,3 +1,5 @@
+// app/kuitansi/[jenis]/new/page.tsx
+
 "use client";
 
 import { useParams } from "next/navigation";

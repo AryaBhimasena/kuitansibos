@@ -80,8 +80,8 @@ export default function PreviewKuitansiDua({ data, step }: Props) {
 
       {/* ================= ISI SURAT ================= */}
       <div className="bp-body-text">
-        Dengan hormat, melalui Anggaran Dana BOS/PBP Tahun 2026,
-        SMAS BINA BANGSA SUNGAI RAYA akan menyelenggarakan kegiatan {data.bonPesanan.isi.uraianKegiatan}
+        Dengan hormat, melalui Anggaran {data.bonPesanan.isi.periodeAnggaran || "PERIODE ANGGARAN"},
+        SMAS BINA BANGSA SUNGAI RAYA akan menyelenggarakan kegiatan {data.bonPesanan.isi.uraianKegiatan || "URAIAN KEGIATAN"}
         <br /><br />
         Sehubungan dengan hal tersebut di atas, kami mengharapkan kepada
         Saudara untuk dapat memenuhi pesanan {data.bonPesanan.isi.uraianPesanan} sebagai berikut :
