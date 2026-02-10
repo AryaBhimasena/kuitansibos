@@ -3,6 +3,7 @@
 import { Pencil, Trash2 } from "lucide-react";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Pencil, Trash2, AlertCircle, X } from "lucide-react";
 
 import "@/styles/pages/dashboard.css";
 import DashboardHeader from "@/lib/dashboard/componentsHeader";
@@ -14,6 +15,7 @@ export default function DashboardPage() {
   const router = useRouter();
   const tahap = getTahapAktif();
   const [openDropdown, setOpenDropdown] = useState(false);
+  const [openPopupPerjalanan, setOpenPopupPerjalanan] = useState(false);
 
   const {
     isMounted,
@@ -87,7 +89,7 @@ export default function DashboardPage() {
 				  Buat Kuitansi Makan/Minum
 				</li>
 
-				<li onClick={() => router.push("/kuitansi/perjalanan/new")}>
+				<li onClick={() => setOpenPopupPerjalanan(true)}>
 				  Buat Kuitansi Perjalanan Dinas
 				</li>
 
@@ -143,6 +145,33 @@ export default function DashboardPage() {
           </tbody>
         </table>
       </div>
+		{openPopupPerjalanan && (
+		  <div className="popup-overlay">
+			<div className="popup-card">
+			  <button
+				className="popup-close"
+				onClick={() => setOpenPopupPerjalanan(false)}
+			  >
+				<X size={20} />
+			  </button>
+
+			  <AlertCircle size={48} className="popup-icon" />
+
+			  <h3>Fitur Dalam Pengembangan</h3>
+			  <p>
+				Kuitansi Perjalanan Dinas sedang dalam tahap pengembangan.
+				Silakan gunakan fitur lainnya terlebih dahulu.
+			  </p>
+
+			  <button
+				className="btn-primary"
+				onClick={() => setOpenPopupPerjalanan(false)}
+			  >
+				Mengerti
+			  </button>
+			</div>
+		  </div>
+		)}
     </div>
   );
 }
